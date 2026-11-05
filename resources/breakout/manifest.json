@@ -1,0 +1,23 @@
+{
+  "commit": "4d09ba6d6a7e891dd8063974dfe81b3d78e3494f",
+  "hashes": {
+    "breakout/prompt.txt": "766ee251d59a7893ed86d5eaea99ddb847529ab2092afc69f90f55fb0a22e876",
+    "breakout/instructions.md": "b33fe0624137cd6f190e42a8659046baf16261f3c29cd6455734523ba473afeb",
+    "breakout/runs/author/answer.md": "a30bdda1acef79b507498edcef7e48d4fff16aa85783741925da9d5d4f42faf0",
+    "breakout/runs/author/hand.npz": "6e8d42658aed3704c7bf6fb67015e9468cc03f1d67cb8a4fd192e6534fcccb4a",
+    "breakout/research/codex.toml": "0ed095ea5be86d47daade93f8fac2d0fd102681b6e2d2e46273cdd70e30bf93c",
+    "breakout/research/evaluation.json": "bc10c6f957af95cdd52ee4be085acd249046f6117dbdb8c735fd5ddb2195c47c",
+    "breakout/LICENSE-authors": "395f7febedfda6b5498ca36cfe3344d3986659ce4385dd8b03d2d75604250a8e",
+    "breakout/LICENSE-MinAtar": "8ceb4b9ee5adedde47b31e975c1d90c73ad27b6b165a1dcd80c7c545eb65b903"
+  },
+  "urls": {
+    "breakout/prompt.txt": "https://raw.githubusercontent.com/RikiyaT/lm_understand-logs/4d09ba6d6a7e891dd8063974dfe81b3d78e3494f/exp5_write_from_scratch/runs/breakout/message.txt",
+    "breakout/instructions.md": "https://raw.githubusercontent.com/RikiyaT/lm_understand-logs/4d09ba6d6a7e891dd8063974dfe81b3d78e3494f/exp5_write_from_scratch/runs/breakout/instructions.md",
+    "breakout/runs/author/answer.md": "https://raw.githubusercontent.com/RikiyaT/lm_understand-logs/4d09ba6d6a7e891dd8063974dfe81b3d78e3494f/exp5_write_from_scratch/runs/breakout/reply/answer.md",
+    "breakout/runs/author/hand.npz": "https://raw.githubusercontent.com/RikiyaT/lm_understand-logs/4d09ba6d6a7e891dd8063974dfe81b3d78e3494f/exp5_write_from_scratch/networks/breakout/hand.npz",
+    "breakout/research/codex.toml": "https://raw.githubusercontent.com/RikiyaT/lm_understand-logs/4d09ba6d6a7e891dd8063974dfe81b3d78e3494f/harness/codex_config.toml",
+    "breakout/research/evaluation.json": "https://raw.githubusercontent.com/RikiyaT/lm_understand-logs/4d09ba6d6a7e891dd8063974dfe81b3d78e3494f/exp5_write_from_scratch/eval/minatar_eval.json",
+    "breakout/LICENSE-authors": "https://raw.githubusercontent.com/RikiyaT/lm_understand-logs/4d09ba6d6a7e891dd8063974dfe81b3d78e3494f/LICENSE",
+    "breakout/LICENSE-MinAtar": "https://raw.githubusercontent.com/RikiyaT/lm_understand-logs/4d09ba6d6a7e891dd8063974dfe81b3d78e3494f/exp5_write_from_scratch/LICENSE-MinAtar"
+  }
+}

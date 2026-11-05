@@ -1,0 +1,29 @@
+# Python bytecode
+__pycache__/
+
+# Virtual environment
+.venv/
+
+# Tool caches
+.mypy_cache/
+.pytest_cache/
+.ruff_cache/
+
+# Build output
+/dist/
+
+# macOS Finder metadata
+.DS_Store
+
+# Local credentials
+.env
+.env.*
+!.env.example
+
+# Raw model evidence can contain private local instructions and request context.
+# Keep publishable weights, replays, run metadata, and audit summaries.
+/resources/**/runs/**/trace/
+/resources/**/runs/**/events.jsonl
+/resources/**/runs/**/stderr.log
+/resources/**/runs/**/preflight.log
+/resources/**/runs/**/inventory.json

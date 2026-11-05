@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Ember · Breakout replay</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Silkscreen&display=swap">
+<style>
+  :root {
+    color-scheme: light;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    --pixel: "Silkscreen", "Courier New", ui-monospace, monospace;
+    --page: #faf9f5; --ink: #34332f; --muted: #6f6b64;
+    --line: #d9d5cd; --accent: #a65039; --surface: #ffffff; --bezel: #ebe5d9;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--page) radial-gradient(#e8e4dc 1px, transparent 1.5px) 0 0 / 18px 18px; color: var(--ink); }
+  main { max-width: 768px; margin: auto; padding: 36px 24px; }
+  header { display: flex; flex-wrap: wrap; gap: 8px 20px; justify-content: space-between; align-items: center; border-bottom: 2px solid var(--ink); padding-bottom: 16px; }
+  h1 { margin: 12px 0 0; font: 32px var(--pixel); text-shadow: 3px 3px 0 var(--accent); }
+  .tag { background: var(--ink); color: var(--page); font: 12px var(--pixel); letter-spacing: .08em; padding: 6px 10px; }
+  .subtle { color: var(--muted); font-size: 13px; line-height: 1.7; }
+  .hud { display: flex; justify-content: space-between; width: min(100%, 516px); margin: 24px auto 0; font-family: var(--pixel); }
+  .hud div:last-child { text-align: right; }
+  .hud dt { color: var(--muted); font-size: 11px; }
+  .hud dd { margin: 4px 0 0; font-size: 28px; transform-origin: left center; }
+  .hud small { color: var(--muted); font-size: 14px; }
+  .bezel { width: min(100%, 516px); margin: 12px auto 28px; padding: 14px 14px 0; background: var(--bezel); border: 2px solid var(--ink); border-radius: 20px; box-shadow: 6px 6px 0 var(--ink); }
+  .screen { position: relative; overflow: hidden; border: 2px solid var(--ink); border-radius: 4px; box-shadow: 0 0 18px rgba(166, 80, 57, .35); }
+  .screen::after { content: ""; position: absolute; inset: 0; pointer-events: none; background: repeating-linear-gradient(transparent 0 3px, rgba(52, 51, 47, .06) 3px 4px); }
+  canvas { display: block; width: 100%; height: auto; aspect-ratio: 1; image-rendering: pixelated; }
+  .strip { display: flex; gap: 10px; align-items: center; min-height: 44px; font: 13px var(--pixel); }
+  .led { width: 10px; height: 10px; background: var(--line); border: 2px solid var(--ink); }
+  .led.on { background: var(--accent); box-shadow: 0 0 8px var(--accent); }
+  .controls { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
+  button, select { height: 44px; background: var(--surface); color: inherit; border: 2px solid var(--ink); border-radius: 0; padding: 0 16px; font: 14px var(--pixel); cursor: pointer; box-shadow: 3px 3px 0 var(--ink); }
+  button:hover, select:hover { background: var(--ink); color: var(--page); }
+  button:active { transform: translate(3px, 3px); box-shadow: none; }
+  #toggle { min-width: 96px; background: var(--accent); color: white; }
+  #toggle:hover { background: #8e412e; }
+  .speed-control { display: flex; align-items: center; gap: 10px; font: 13px var(--pixel); }
+  .select-wrap { position: relative; display: inline-flex; }
+  select { appearance: none; -webkit-appearance: none; min-width: 112px; padding-right: 40px; }
+  .select-wrap svg { position: absolute; width: 16px; height: 16px; right: 14px; top: 50%; transform: translateY(-50%); pointer-events: none; }
+  .select-wrap:hover svg { color: var(--page); }
+  :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+  #seek { appearance: none; -webkit-appearance: none; display: block; width: 100%; height: 28px; margin: 20px 0 16px; padding: 0; border: 4px solid var(--ink); box-shadow: 3px 3px 0 var(--ink); cursor: pointer;
+          background: repeating-linear-gradient(90deg, transparent 0 6px, var(--ink) 6px 8px), linear-gradient(90deg, #c2562c var(--progress, 0%), #5c5750 0); }
+  #seek::-webkit-slider-runnable-track { height: 100%; background: transparent; }
+  #seek::-webkit-slider-thumb { -webkit-appearance: none; box-sizing: border-box; width: 12px; height: 20px; background: var(--page); border: 2px solid var(--ink); }
+  #seek::-moz-range-track { height: 100%; background: transparent; border: 0; }
+  #seek::-moz-range-thumb { box-sizing: border-box; width: 12px; height: 20px; background: var(--page); border: 2px solid var(--ink); border-radius: 0; }
+  @media (max-width: 600px) {
+    main { padding: 20px 20px 28px; }
+    h1 { font-size: 26px; }
+    .hud dd { font-size: 22px; }
+    .controls { gap: 10px; }
+    button { padding: 0 12px; }
+    #toggle { min-width: 80px; }
+    .speed-control { gap: 8px; }
+    select { min-width: 104px; }
+  }
+</style>
+<main>
+  <header><h1>ember / breakout</h1><span class="tag">RECORDED PLAY</span></header>
+  <dl class="hud">
+    <div><dt>Score</dt><dd id="score">0000</dd></div>
+    <div><dt>Step</dt><dd><span id="step">00000</span><small id="total"></small></dd></div>
+  </dl>
+  <div class="bezel">
+    <div class="screen"><canvas id="board" width="480" height="480" aria-label="Breakout game recording" role="img"></canvas></div>
+    <div class="strip"><span id="led" class="led" aria-hidden="true"></span><span id="status" aria-live="off"></span></div>
+  </div>
+  <div class="controls">
+    <button id="toggle" type="button">Play</button>
+    <button id="restart" type="button">Restart</button>
+    <label class="speed-control">Speed
+      <span class="select-wrap">
+        <select id="speed">
+          <option value="5">5 fps</option><option value="8">8 fps</option>
+          <option value="10">10 fps</option><option value="15">15 fps</option>
+          <option value="20" selected>20 fps</option><option value="25">25 fps</option>
+          <option value="30">30 fps</option><option value="40">40 fps</option>
+          <option value="50">50 fps</option><option value="60">60 fps</option>
+        </select>
+        <svg viewBox="0 0 16 16" fill="none" aria-hidden="true" focusable="false"><path d="m4 6 4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </span>
+    </label>
+  </div>
+  <input id="seek" type="range" min="0" value="0" aria-label="Recording frame">
+  <p id="details" class="subtle"></p>
+</main>
+<script id="episode" type="application/json">__EPISODE__</script>
+<script>
+  "use strict";
+  const episode = JSON.parse(document.getElementById("episode").textContent);
+  const board = document.getElementById("board");
+  const context = board.getContext("2d");
+  const seek = document.getElementById("seek");
+  const toggle = document.getElementById("toggle");
+  const speed = document.getElementById("speed");
+  const score = document.getElementById("score");
+  const gap = "#e3dccf";
+  const palette = ["#f4efe6", "#34332f", "#c2562c", "#8c8276", "#7a3a2a"];
+  const calm = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const padded = (value, width) => String(value).padStart(width, "0");
+  let index = 0, playing = false, last = 0;
+  seek.max = episode.frames.length - 1;
+  document.getElementById("details").textContent = `${episode.steps} steps · ${episode.capped ? "step limit reached" : "episode ended"} · score ${episode.score}`;
+  document.getElementById("total").textContent = `/${padded(episode.steps, 5)}`;
+  function state() {
+    if (index === episode.frames.length - 1) return `${episode.capped ? "STEP LIMIT" : "GAME OVER"} · SCORE ${padded(episode.score, 4)}`;
+    if (playing) return "PLAYING";
+    return index === 0 ? "PRESS PLAY" : "PAUSED";
+  }
+  function draw() {
+    const frame = episode.frames[index];
+    context.fillStyle = gap; context.fillRect(0, 0, 480, 480);
+    frame.cells.forEach((cell, position) => {
+      context.fillStyle = palette[cell];
+      context.fillRect((position % 10) * 48 + 2, Math.floor(position / 10) * 48 + 2, 44, 44);
+    });
+    seek.value = index;
+    seek.style.setProperty("--progress", `${(index / (episode.frames.length - 1)) * 100}%`);
+    score.textContent = padded(frame.score, 4);
+    document.getElementById("step").textContent = padded(index, 5);
+    document.getElementById("status").textContent = state();
+    document.getElementById("led").classList.toggle("on", playing);
+    toggle.textContent = playing ? "Pause" : "Play";
+  }
+  function bump() {
+    const rose = index > 0 && episode.frames[index].score > episode.frames[index - 1].score;
+    if (rose && !calm) score.animate([{ transform: "scale(1.35)", color: "#a65039" }, { transform: "none" }], 280);
+  }
+  function tick(now) {
+    if (playing && now - last >= 1000 / Number(speed.value)) {
+      index = Math.min(index + 1, episode.frames.length - 1);
+      if (index === episode.frames.length - 1) playing = false;
+      last = now; draw(); bump();
+    }
+    requestAnimationFrame(tick);
+  }
+  toggle.addEventListener("click", () => {
+    if (index === episode.frames.length - 1) index = 0;
+    playing = !playing; last = performance.now(); draw();
+  });
+  document.getElementById("restart").addEventListener("click", () => { index = 0; playing = false; draw(); });
+  seek.addEventListener("input", () => { index = Number(seek.value); playing = false; draw(); });
+  draw(); requestAnimationFrame(tick);
+</script>
+</html>

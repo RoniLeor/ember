@@ -1,0 +1,50 @@
+{
+  "kind": "local_verification",
+  "checks": {
+    "command": "make check PYTEST_ARGS=",
+    "tests_passed": 428,
+    "format_lint_types_passed": true,
+    "build_and_wheel_inspection_passed": true
+  },
+  "independent_review": {
+    "workflow": "codex-claude-crew",
+    "run_id": "20261104-201537-261c",
+    "result": "no blocking correctness issues"
+  },
+  "saved_reaudit": {
+    "command": "uv run --no-sync ember audit --provider codex --mode comparison --run resources/breakout/runs/astra-20261104T181934Z",
+    "passed": true
+  },
+  "prior_resource_files_unchanged": 60,
+  "reviewed_source_test_document_files_unchanged": 80,
+  "fresh_model_requests": 1,
+  "trace_summary": {
+    "advertised_tools": [
+      "functions.exec",
+      "functions.request_user_input",
+      "functions.request_user_input_async",
+      "functions.wait"
+    ],
+    "tool_inventory_empty": false,
+    "prompt_context_matches": false,
+    "extra_message_count": 2,
+    "inference_count": 1,
+    "tool_call_count": 0,
+    "errors": []
+  },
+  "answer_sha256": "3978dce63679c99ea15ef631eb80178a2f319bf2d1fa56ab6869af6fa30aa424",
+  "diagnostic": {
+    "kind": "reconstructed",
+    "episodes": 100,
+    "mean": 530.13,
+    "standard_error": 14.866304214904961,
+    "capped_fraction": 0.76,
+    "evaluator_matches_authors": false
+  },
+  "replay": {
+    "file": "breakout.html",
+    "score": 652,
+    "steps": 10000,
+    "capped": true
+  }
+}

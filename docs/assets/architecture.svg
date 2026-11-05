@@ -1,0 +1,277 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="460" viewBox="0 0 1440 460" role="img" aria-labelledby="title desc">
+<title id="title">One-shot weight synthesis and neural policy execution</title>
+<desc id="desc">A task specification is provided to a language model. Its saved assignments construct three weight matrices and biases for a 600 to 32 to 32 to 6 policy. The policy interacts with Breakout using sampled actions and encoded observations. Gameplay feedback does not return to the language model.</desc>
+<defs><marker id="arrow" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto"><path d="M0 0 L7 3.5 L0 7 Z" fill="#39434d"/></marker></defs>
+<style>text{font-family:Arial,Helvetica,sans-serif;fill:#27313a}.label{font-size:19px}.small{font-size:14px;fill:#707982}.math{font-family:Georgia,'Times New Roman',serif;font-style:italic;font-size:24px}.line{fill:none;stroke:#39434d;stroke-width:1.4;marker-end:url(#arrow)}</style>
+<rect width="1440" height="460" fill="white"/>
+<text x="42" y="40" class="label"><tspan font-weight="700">(a)</tspan> Weight synthesis</text>
+<text x="853" y="40" class="label"><tspan font-weight="700">(b)</tspan> Policy execution</text>
+<line x1="805" y1="72" x2="805" y2="385" stroke="#d7dde2" stroke-dasharray="4 6"/>
+<!-- Pinned task, represented as a document rather than an interface card. -->
+<path d="M68 137 H159 L181 159 V284 H68 Z M159 137 V159 H181" fill="#fbfbfa" stroke="#59616a" stroke-width="1.4"/>
+<path d="M88 180 H156 M88 199 H149 M88 218 H157 M88 237 H135" stroke="#a4acb3" stroke-width="2"/>
+<text x="125" y="116" text-anchor="middle" class="math">x</text>
+<text x="125" y="318" text-anchor="middle" class="label">Task specification</text>
+<path d="M200 211 H260" class="line"/>
+<!-- Model symbol -->
+<path d="M282 158 L327 132 H395 L440 158 V259 L395 285 H327 L282 259 Z" fill="#f9f0e8" stroke="#b8774c" stroke-width="1.5"/>
+<text x="361" y="209" text-anchor="middle" font-family="Georgia,serif" font-style="italic" font-size="31">f<tspan baseline-shift="sub" font-size="20">φ</tspan></text>
+<text x="361" y="244" text-anchor="middle" class="small">LLM</text>
+<text x="361" y="318" text-anchor="middle" class="label">One response</text>
+<path d="M457 211 H506" class="line"/>
+
+<rect x="535" y="156" width="137" height="137" fill="white" stroke="#9099a1" stroke-width="1"/>
+<rect x="540" y="161" width="19" height="19" fill="#f7e5d3"/>
+<rect x="561" y="161" width="19" height="19" fill="#f0f1f2"/>
+<rect x="582" y="161" width="19" height="19" fill="#f0f1f2"/>
+<rect x="603" y="161" width="19" height="19" fill="#f0f1f2"/>
+<rect x="624" y="161" width="19" height="19" fill="#f7e5d3"/>
+<rect x="645" y="161" width="19" height="19" fill="#f0f1f2"/>
+<rect x="540" y="182" width="19" height="19" fill="#f0f1f2"/>
+<rect x="561" y="182" width="19" height="19" fill="#d78b52"/>
+<rect x="582" y="182" width="19" height="19" fill="#f0f1f2"/>
+<rect x="603" y="182" width="19" height="19" fill="#f0f1f2"/>
+<rect x="624" y="182" width="19" height="19" fill="#f0f1f2"/>
+<rect x="645" y="182" width="19" height="19" fill="#d78b52"/>
+<rect x="540" y="203" width="19" height="19" fill="#f0f1f2"/>
+<rect x="561" y="203" width="19" height="19" fill="#f0f1f2"/>
+<rect x="582" y="203" width="19" height="19" fill="#f7e5d3"/>
+<rect x="603" y="203" width="19" height="19" fill="#f0f1f2"/>
+<rect x="624" y="203" width="19" height="19" fill="#f0f1f2"/>
+<rect x="645" y="203" width="19" height="19" fill="#f0f1f2"/>
+<rect x="540" y="224" width="19" height="19" fill="#f0f1f2"/>
+<rect x="561" y="224" width="19" height="19" fill="#f0f1f2"/>
+<rect x="582" y="224" width="19" height="19" fill="#f0f1f2"/>
+<rect x="603" y="224" width="19" height="19" fill="#d78b52"/>
+<rect x="624" y="224" width="19" height="19" fill="#f0f1f2"/>
+<rect x="645" y="224" width="19" height="19" fill="#f0f1f2"/>
+<rect x="540" y="245" width="19" height="19" fill="#f7e5d3"/>
+<rect x="561" y="245" width="19" height="19" fill="#f0f1f2"/>
+<rect x="582" y="245" width="19" height="19" fill="#f0f1f2"/>
+<rect x="603" y="245" width="19" height="19" fill="#f0f1f2"/>
+<rect x="624" y="245" width="19" height="19" fill="#f7e5d3"/>
+<rect x="645" y="245" width="19" height="19" fill="#f0f1f2"/>
+<rect x="540" y="266" width="19" height="19" fill="#f0f1f2"/>
+<rect x="561" y="266" width="19" height="19" fill="#d78b52"/>
+<rect x="582" y="266" width="19" height="19" fill="#f0f1f2"/>
+<rect x="603" y="266" width="19" height="19" fill="#f0f1f2"/>
+<rect x="624" y="266" width="19" height="19" fill="#f0f1f2"/>
+<rect x="645" y="266" width="19" height="19" fill="#d78b52"/>
+<rect x="559" y="139" width="137" height="137" fill="white" stroke="#9099a1" stroke-width="1"/>
+<rect x="564" y="144" width="19" height="19" fill="#f0f1f2"/>
+<rect x="585" y="144" width="19" height="19" fill="#d78b52"/>
+<rect x="606" y="144" width="19" height="19" fill="#f0f1f2"/>
+<rect x="627" y="144" width="19" height="19" fill="#f0f1f2"/>
+<rect x="648" y="144" width="19" height="19" fill="#f0f1f2"/>
+<rect x="669" y="144" width="19" height="19" fill="#d78b52"/>
+<rect x="564" y="165" width="19" height="19" fill="#f0f1f2"/>
+<rect x="585" y="165" width="19" height="19" fill="#f0f1f2"/>
+<rect x="606" y="165" width="19" height="19" fill="#f7e5d3"/>
+<rect x="627" y="165" width="19" height="19" fill="#f0f1f2"/>
+<rect x="648" y="165" width="19" height="19" fill="#f0f1f2"/>
+<rect x="669" y="165" width="19" height="19" fill="#f0f1f2"/>
+<rect x="564" y="186" width="19" height="19" fill="#f0f1f2"/>
+<rect x="585" y="186" width="19" height="19" fill="#f0f1f2"/>
+<rect x="606" y="186" width="19" height="19" fill="#f0f1f2"/>
+<rect x="627" y="186" width="19" height="19" fill="#d78b52"/>
+<rect x="648" y="186" width="19" height="19" fill="#f0f1f2"/>
+<rect x="669" y="186" width="19" height="19" fill="#f0f1f2"/>
+<rect x="564" y="207" width="19" height="19" fill="#f7e5d3"/>
+<rect x="585" y="207" width="19" height="19" fill="#f0f1f2"/>
+<rect x="606" y="207" width="19" height="19" fill="#f0f1f2"/>
+<rect x="627" y="207" width="19" height="19" fill="#f0f1f2"/>
+<rect x="648" y="207" width="19" height="19" fill="#f7e5d3"/>
+<rect x="669" y="207" width="19" height="19" fill="#f0f1f2"/>
+<rect x="564" y="228" width="19" height="19" fill="#f0f1f2"/>
+<rect x="585" y="228" width="19" height="19" fill="#d78b52"/>
+<rect x="606" y="228" width="19" height="19" fill="#f0f1f2"/>
+<rect x="627" y="228" width="19" height="19" fill="#f0f1f2"/>
+<rect x="648" y="228" width="19" height="19" fill="#f0f1f2"/>
+<rect x="669" y="228" width="19" height="19" fill="#d78b52"/>
+<rect x="564" y="249" width="19" height="19" fill="#f0f1f2"/>
+<rect x="585" y="249" width="19" height="19" fill="#f0f1f2"/>
+<rect x="606" y="249" width="19" height="19" fill="#f7e5d3"/>
+<rect x="627" y="249" width="19" height="19" fill="#f0f1f2"/>
+<rect x="648" y="249" width="19" height="19" fill="#f0f1f2"/>
+<rect x="669" y="249" width="19" height="19" fill="#f0f1f2"/>
+<rect x="583" y="122" width="137" height="137" fill="white" stroke="#9099a1" stroke-width="1"/>
+<rect x="588" y="127" width="19" height="19" fill="#f0f1f2"/>
+<rect x="609" y="127" width="19" height="19" fill="#f0f1f2"/>
+<rect x="630" y="127" width="19" height="19" fill="#f7e5d3"/>
+<rect x="651" y="127" width="19" height="19" fill="#f0f1f2"/>
+<rect x="672" y="127" width="19" height="19" fill="#f0f1f2"/>
+<rect x="693" y="127" width="19" height="19" fill="#f0f1f2"/>
+<rect x="588" y="148" width="19" height="19" fill="#f0f1f2"/>
+<rect x="609" y="148" width="19" height="19" fill="#f0f1f2"/>
+<rect x="630" y="148" width="19" height="19" fill="#f0f1f2"/>
+<rect x="651" y="148" width="19" height="19" fill="#d78b52"/>
+<rect x="672" y="148" width="19" height="19" fill="#f0f1f2"/>
+<rect x="693" y="148" width="19" height="19" fill="#f0f1f2"/>
+<rect x="588" y="169" width="19" height="19" fill="#f7e5d3"/>
+<rect x="609" y="169" width="19" height="19" fill="#f0f1f2"/>
+<rect x="630" y="169" width="19" height="19" fill="#f0f1f2"/>
+<rect x="651" y="169" width="19" height="19" fill="#f0f1f2"/>
+<rect x="672" y="169" width="19" height="19" fill="#f7e5d3"/>
+<rect x="693" y="169" width="19" height="19" fill="#f0f1f2"/>
+<rect x="588" y="190" width="19" height="19" fill="#f0f1f2"/>
+<rect x="609" y="190" width="19" height="19" fill="#d78b52"/>
+<rect x="630" y="190" width="19" height="19" fill="#f0f1f2"/>
+<rect x="651" y="190" width="19" height="19" fill="#f0f1f2"/>
+<rect x="672" y="190" width="19" height="19" fill="#f0f1f2"/>
+<rect x="693" y="190" width="19" height="19" fill="#d78b52"/>
+<rect x="588" y="211" width="19" height="19" fill="#f0f1f2"/>
+<rect x="609" y="211" width="19" height="19" fill="#f0f1f2"/>
+<rect x="630" y="211" width="19" height="19" fill="#f7e5d3"/>
+<rect x="651" y="211" width="19" height="19" fill="#f0f1f2"/>
+<rect x="672" y="211" width="19" height="19" fill="#f0f1f2"/>
+<rect x="693" y="211" width="19" height="19" fill="#f0f1f2"/>
+<rect x="588" y="232" width="19" height="19" fill="#f0f1f2"/>
+<rect x="609" y="232" width="19" height="19" fill="#f0f1f2"/>
+<rect x="630" y="232" width="19" height="19" fill="#f0f1f2"/>
+<rect x="651" y="232" width="19" height="19" fill="#d78b52"/>
+<rect x="672" y="232" width="19" height="19" fill="#f0f1f2"/>
+<rect x="693" y="232" width="19" height="19" fill="#f0f1f2"/>
+<text x="625" y="110" text-anchor="middle" class="math">θ = {W, b}</text>
+<text x="625" y="318" text-anchor="middle" class="label">Weight assignments</text>
+<path d="M728 211 H838" class="line"/>
+<text x="782" y="189" text-anchor="middle" class="small">load</text>
+
+<line x1="870" y1="135" x2="951" y2="151" stroke="#ccd3d9" stroke-width=".8"/>
+<line x1="870" y1="135" x2="951" y2="190" stroke="#ccd3d9" stroke-width=".8"/>
+<line x1="870" y1="135" x2="951" y2="229" stroke="#ccd3d9" stroke-width=".8"/>
+<line x1="870" y1="135" x2="951" y2="268" stroke="#ccd3d9" stroke-width=".8"/>
+<line x1="870" y1="168" x2="951" y2="151" stroke="#ccd3d9" stroke-width=".8"/>
+<line x1="870" y1="168" x2="951" y2="190" stroke="#ccd3d9" stroke-width=".8"/>
+<line x1="870" y1="168" x2="951" y2="229" stroke="#ccd3d9" stroke-width=".8"/>
+<line x1="870" y1="168" x2="951" y2="268" stroke="#ccd3d9" stroke-width=".8"/>
+<line x1="870" y1="201" x2="951" y2="151" stroke="#ccd3d9" stroke-width=".8"/>
+<line x1="870" y1="201" x2="951" y2="190" stroke="#ccd3d9" stroke-width=".8"/>
+<line x1="870" y1="201" x2="951" y2="229" stroke="#ccd3d9" stroke-width=".8"/>
+<line x1="870" y1="201" x2="951" y2="268" stroke="#ccd3d9" stroke-width=".8"/>
+<line x1="870" y1="234" x2="951" y2="151" stroke="#ccd3d9" stroke-width=".8"/>
+<line x1="870" y1="234" x2="951" y2="190" stroke="#ccd3d9" stroke-width=".8"/>
+<line x1="870" y1="234" x2="951" y2="229" stroke="#ccd3d9" stroke-width=".8"/>
+<line x1="870" y1="234" x2="951" y2="268" stroke="#ccd3d9" stroke-width=".8"/>
+<line x1="870" y1="267" x2="951" y2="151" stroke="#ccd3d9" stroke-width=".8"/>
+<line x1="870" y1="267" x2="951" y2="190" stroke="#ccd3d9" stroke-width=".8"/>
+<line x1="870" y1="267" x2="951" y2="229" stroke="#ccd3d9" stroke-width=".8"/>
+<line x1="870" y1="267" x2="951" y2="268" stroke="#ccd3d9" stroke-width=".8"/>
+<line x1="870" y1="300" x2="951" y2="151" stroke="#ccd3d9" stroke-width=".8"/>
+<line x1="870" y1="300" x2="951" y2="190" stroke="#ccd3d9" stroke-width=".8"/>
+<line x1="870" y1="300" x2="951" y2="229" stroke="#ccd3d9" stroke-width=".8"/>
+<line x1="870" y1="300" x2="951" y2="268" stroke="#ccd3d9" stroke-width=".8"/>
+<line x1="951" y1="151" x2="1032" y2="151" stroke="#ccd3d9" stroke-width=".8"/>
+<line x1="951" y1="151" x2="1032" y2="190" stroke="#ccd3d9" stroke-width=".8"/>
+<line x1="951" y1="151" x2="1032" y2="229" stroke="#ccd3d9" stroke-width=".8"/>
+<line x1="951" y1="151" x2="1032" y2="268" stroke="#ccd3d9" stroke-width=".8"/>
+<line x1="951" y1="190" x2="1032" y2="151" stroke="#ccd3d9" stroke-width=".8"/>
+<line x1="951" y1="190" x2="1032" y2="190" stroke="#ccd3d9" stroke-width=".8"/>
+<line x1="951" y1="190" x2="1032" y2="229" stroke="#ccd3d9" stroke-width=".8"/>
+<line x1="951" y1="190" x2="1032" y2="268" stroke="#ccd3d9" stroke-width=".8"/>
+<line x1="951" y1="229" x2="1032" y2="151" stroke="#ccd3d9" stroke-width=".8"/>
+<line x1="951" y1="229" x2="1032" y2="190" stroke="#ccd3d9" stroke-width=".8"/>
+<line x1="951" y1="229" x2="1032" y2="229" stroke="#ccd3d9" stroke-width=".8"/>
+<line x1="951" y1="229" x2="1032" y2="268" stroke="#ccd3d9" stroke-width=".8"/>
+<line x1="951" y1="268" x2="1032" y2="151" stroke="#ccd3d9" stroke-width=".8"/>
+<line x1="951" y1="268" x2="1032" y2="190" stroke="#ccd3d9" stroke-width=".8"/>
+<line x1="951" y1="268" x2="1032" y2="229" stroke="#ccd3d9" stroke-width=".8"/>
+<line x1="951" y1="268" x2="1032" y2="268" stroke="#ccd3d9" stroke-width=".8"/>
+<line x1="1032" y1="151" x2="1113" y2="135" stroke="#ccd3d9" stroke-width=".8"/>
+<line x1="1032" y1="151" x2="1113" y2="168" stroke="#ccd3d9" stroke-width=".8"/>
+<line x1="1032" y1="151" x2="1113" y2="201" stroke="#ccd3d9" stroke-width=".8"/>
+<line x1="1032" y1="151" x2="1113" y2="234" stroke="#ccd3d9" stroke-width=".8"/>
+<line x1="1032" y1="151" x2="1113" y2="267" stroke="#ccd3d9" stroke-width=".8"/>
+<line x1="1032" y1="151" x2="1113" y2="300" stroke="#ccd3d9" stroke-width=".8"/>
+<line x1="1032" y1="190" x2="1113" y2="135" stroke="#ccd3d9" stroke-width=".8"/>
+<line x1="1032" y1="190" x2="1113" y2="168" stroke="#ccd3d9" stroke-width=".8"/>
+<line x1="1032" y1="190" x2="1113" y2="201" stroke="#ccd3d9" stroke-width=".8"/>
+<line x1="1032" y1="190" x2="1113" y2="234" stroke="#ccd3d9" stroke-width=".8"/>
+<line x1="1032" y1="190" x2="1113" y2="267" stroke="#ccd3d9" stroke-width=".8"/>
+<line x1="1032" y1="190" x2="1113" y2="300" stroke="#ccd3d9" stroke-width=".8"/>
+<line x1="1032" y1="229" x2="1113" y2="135" stroke="#ccd3d9" stroke-width=".8"/>
+<line x1="1032" y1="229" x2="1113" y2="168" stroke="#ccd3d9" stroke-width=".8"/>
+<line x1="1032" y1="229" x2="1113" y2="201" stroke="#ccd3d9" stroke-width=".8"/>
+<line x1="1032" y1="229" x2="1113" y2="234" stroke="#ccd3d9" stroke-width=".8"/>
+<line x1="1032" y1="229" x2="1113" y2="267" stroke="#ccd3d9" stroke-width=".8"/>
+<line x1="1032" y1="229" x2="1113" y2="300" stroke="#ccd3d9" stroke-width=".8"/>
+<line x1="1032" y1="268" x2="1113" y2="135" stroke="#ccd3d9" stroke-width=".8"/>
+<line x1="1032" y1="268" x2="1113" y2="168" stroke="#ccd3d9" stroke-width=".8"/>
+<line x1="1032" y1="268" x2="1113" y2="201" stroke="#ccd3d9" stroke-width=".8"/>
+<line x1="1032" y1="268" x2="1113" y2="234" stroke="#ccd3d9" stroke-width=".8"/>
+<line x1="1032" y1="268" x2="1113" y2="267" stroke="#ccd3d9" stroke-width=".8"/>
+<line x1="1032" y1="268" x2="1113" y2="300" stroke="#ccd3d9" stroke-width=".8"/>
+<circle cx="870" cy="135" r="7" fill="#fff" stroke="#53616e" stroke-width="1.3"/>
+<circle cx="870" cy="168" r="7" fill="#fff" stroke="#53616e" stroke-width="1.3"/>
+<circle cx="870" cy="201" r="7" fill="#fff" stroke="#53616e" stroke-width="1.3"/>
+<circle cx="870" cy="234" r="7" fill="#fff" stroke="#53616e" stroke-width="1.3"/>
+<circle cx="870" cy="267" r="7" fill="#fff" stroke="#53616e" stroke-width="1.3"/>
+<circle cx="870" cy="300" r="7" fill="#fff" stroke="#53616e" stroke-width="1.3"/>
+<text x="870" y="344" text-anchor="middle" class="small">600</text>
+<circle cx="951" cy="151" r="7" fill="#fff" stroke="#53616e" stroke-width="1.3"/>
+<circle cx="951" cy="190" r="7" fill="#fff" stroke="#53616e" stroke-width="1.3"/>
+<circle cx="951" cy="229" r="7" fill="#fff" stroke="#53616e" stroke-width="1.3"/>
+<circle cx="951" cy="268" r="7" fill="#fff" stroke="#53616e" stroke-width="1.3"/>
+<text x="951" y="344" text-anchor="middle" class="small">32</text>
+<circle cx="1032" cy="151" r="7" fill="#fff" stroke="#53616e" stroke-width="1.3"/>
+<circle cx="1032" cy="190" r="7" fill="#fff" stroke="#53616e" stroke-width="1.3"/>
+<circle cx="1032" cy="229" r="7" fill="#fff" stroke="#53616e" stroke-width="1.3"/>
+<circle cx="1032" cy="268" r="7" fill="#fff" stroke="#53616e" stroke-width="1.3"/>
+<text x="1032" y="344" text-anchor="middle" class="small">32</text>
+<circle cx="1113" cy="135" r="7" fill="#f9eee4" stroke="#b8774c" stroke-width="1.3"/>
+<circle cx="1113" cy="168" r="7" fill="#f9eee4" stroke="#b8774c" stroke-width="1.3"/>
+<circle cx="1113" cy="201" r="7" fill="#f9eee4" stroke="#b8774c" stroke-width="1.3"/>
+<circle cx="1113" cy="234" r="7" fill="#f9eee4" stroke="#b8774c" stroke-width="1.3"/>
+<circle cx="1113" cy="267" r="7" fill="#f9eee4" stroke="#b8774c" stroke-width="1.3"/>
+<circle cx="1113" cy="300" r="7" fill="#f9eee4" stroke="#b8774c" stroke-width="1.3"/>
+<text x="1113" y="344" text-anchor="middle" class="small">6</text>
+<text x="991" y="99" text-anchor="middle" class="math">π<tspan baseline-shift="sub" font-size="16">θ</tspan>(a | s)</text>
+<path d="M1135 181 H1223" class="line"/>
+<text x="1180" y="161" text-anchor="middle" class="math">a<tspan baseline-shift="sub" font-size="15">t</tspan></text>
+<path d="M1223 259 H1135" class="line"/>
+<text x="1180" y="289" text-anchor="middle" class="math">s<tspan baseline-shift="sub" font-size="15">t+1</tspan></text>
+<!-- A schematic observation, not a captured gameplay frame. -->
+<rect x="1242" y="137" width="154" height="154" fill="#fbfcfd" stroke="#707b85" stroke-width="1.2"/>
+
+<line x1="1257.4" y1="137" x2="1257.4" y2="291" stroke="#edf0f2" stroke-width=".6"/>
+<line x1="1242" y1="152.4" x2="1396" y2="152.4" stroke="#edf0f2" stroke-width=".6"/>
+<line x1="1272.8" y1="137" x2="1272.8" y2="291" stroke="#edf0f2" stroke-width=".6"/>
+<line x1="1242" y1="167.8" x2="1396" y2="167.8" stroke="#edf0f2" stroke-width=".6"/>
+<line x1="1288.2" y1="137" x2="1288.2" y2="291" stroke="#edf0f2" stroke-width=".6"/>
+<line x1="1242" y1="183.2" x2="1396" y2="183.2" stroke="#edf0f2" stroke-width=".6"/>
+<line x1="1303.6" y1="137" x2="1303.6" y2="291" stroke="#edf0f2" stroke-width=".6"/>
+<line x1="1242" y1="198.6" x2="1396" y2="198.6" stroke="#edf0f2" stroke-width=".6"/>
+<line x1="1319.0" y1="137" x2="1319.0" y2="291" stroke="#edf0f2" stroke-width=".6"/>
+<line x1="1242" y1="214.0" x2="1396" y2="214.0" stroke="#edf0f2" stroke-width=".6"/>
+<line x1="1334.4" y1="137" x2="1334.4" y2="291" stroke="#edf0f2" stroke-width=".6"/>
+<line x1="1242" y1="229.4" x2="1396" y2="229.4" stroke="#edf0f2" stroke-width=".6"/>
+<line x1="1349.8" y1="137" x2="1349.8" y2="291" stroke="#edf0f2" stroke-width=".6"/>
+<line x1="1242" y1="244.8" x2="1396" y2="244.8" stroke="#edf0f2" stroke-width=".6"/>
+<line x1="1365.2" y1="137" x2="1365.2" y2="291" stroke="#edf0f2" stroke-width=".6"/>
+<line x1="1242" y1="260.2" x2="1396" y2="260.2" stroke="#edf0f2" stroke-width=".6"/>
+<line x1="1380.6" y1="137" x2="1380.6" y2="291" stroke="#edf0f2" stroke-width=".6"/>
+<line x1="1242" y1="275.6" x2="1396" y2="275.6" stroke="#edf0f2" stroke-width=".6"/>
+<rect x="1258.0" y="153.0" width="13" height="13" fill="#b4c6d4"/>
+<rect x="1273.4" y="153.0" width="13" height="13" fill="#b4c6d4"/>
+<rect x="1288.8" y="153.0" width="13" height="13" fill="#b4c6d4"/>
+<rect x="1304.2" y="153.0" width="13" height="13" fill="#b4c6d4"/>
+<rect x="1319.6" y="153.0" width="13" height="13" fill="#b4c6d4"/>
+<rect x="1335.0" y="153.0" width="13" height="13" fill="#b4c6d4"/>
+<rect x="1350.4" y="153.0" width="13" height="13" fill="#b4c6d4"/>
+<rect x="1365.8" y="153.0" width="13" height="13" fill="#b4c6d4"/>
+<rect x="1258.0" y="168.4" width="13" height="13" fill="#7998b0"/>
+<rect x="1273.4" y="168.4" width="13" height="13" fill="#7998b0"/>
+<rect x="1288.8" y="168.4" width="13" height="13" fill="#7998b0"/>
+<rect x="1304.2" y="168.4" width="13" height="13" fill="#7998b0"/>
+<rect x="1319.6" y="168.4" width="13" height="13" fill="#7998b0"/>
+<rect x="1335.0" y="168.4" width="13" height="13" fill="#7998b0"/>
+<rect x="1350.4" y="168.4" width="13" height="13" fill="#7998b0"/>
+<rect x="1365.8" y="168.4" width="13" height="13" fill="#7998b0"/>
+<rect x="1305" y="260" width="43" height="7" fill="#4a647b"/>
+<rect x="1334" y="214" width="9" height="9" fill="#ce793e"/>
+<text x="1319" y="318" text-anchor="middle" class="label">Breakout</text>
+<text x="1319" y="344" text-anchor="middle" class="small">schematic observation</text>
+<path d="M42 390 H1398" stroke="#e0e4e8" stroke-width="1"/>
+<text x="42" y="424" class="small">No gradient training</text>
+<text x="435" y="424" class="small">No environment feedback to the LLM</text>
+<text x="1398" y="424" text-anchor="end" class="small">20,486 parameters · MLP policy with tanh activations</text>
+</svg>

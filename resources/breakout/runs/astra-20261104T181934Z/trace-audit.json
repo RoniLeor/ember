@@ -1,0 +1,14 @@
+{
+  "advertised_tools": [
+    "functions.exec",
+    "functions.request_user_input",
+    "functions.request_user_input_async",
+    "functions.wait"
+  ],
+  "tool_inventory_empty": false,
+  "prompt_context_matches": false,
+  "extra_message_count": 2,
+  "inference_count": 1,
+  "tool_call_count": 0,
+  "errors": []
+}

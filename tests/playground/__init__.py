@@ -1,0 +1,1 @@
+"""Game-specific adapter checks."""
