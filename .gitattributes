@@ -1,0 +1,2 @@
+# Recorded replay HTML is generated output, not application source.
+resources/**/*.html linguist-generated=true
