@@ -1,0 +1,62 @@
+{
+  "game": "asterix",
+  "kind": "reconstructed",
+  "evaluator_matches_authors": false,
+  "settings": {
+    "experiment": "asterix",
+    "device": "cpu",
+    "episodes": 1000,
+    "seed": 0,
+    "max_steps": 10000
+  },
+  "published_result": {
+    "mean": 53.178,
+    "standard_error": 1.023305169277215,
+    "episodes": 1000
+  },
+  "published_weights_in_ember": {
+    "mean": 53.469,
+    "standard_error": 1.0205589544850309,
+    "mean_length": 864.812,
+    "capped_fraction": 0.0,
+    "network_sha256": "4c537e227824318c650d98e1e52de5a106071699213b7551e0810af71e9cdf1e"
+  },
+  "fresh_astra": {
+    "mean": 71.909,
+    "standard_error": 1.3203052393007175,
+    "mean_length": 996.919,
+    "capped_fraction": 0.0,
+    "network_sha256": "845fad3aa75317170754c9eb4748b484d30f5897e81b1d76a49e14400948b497",
+    "applied": 100,
+    "skipped": []
+  },
+  "mean_difference": 18.440000000000005,
+  "relative_mean_increase_percent": 34.487272999308026,
+  "inference_count": 1,
+  "tool_call_count": 0,
+  "advertised_tools": [
+    "functions.exec",
+    "functions.request_user_input",
+    "functions.request_user_input_async",
+    "functions.wait"
+  ],
+  "extra_message_count": 2,
+  "all_1000_candidate_scores_reproduced": true,
+  "selection": "One fresh response; no feedback or candidate selection.",
+  "limits": [
+    "Original scoring program unavailable; no exact reproduction claim.",
+    "One evaluation seed; no held-out seed assessment.",
+    "Episode outcomes are not paired because policies consume environment RNG differently.",
+    "Four tools advertised; extra developer instruction and user global/repository guidance present. Zero attempted tool calls observed."
+  ],
+  "run": "resources/asterix/runs/astra-20261105T121139Z",
+  "author_evaluation": "resources/asterix/runs/author/evaluation.json",
+  "all_1000_author_scores_match_published_hand_npz_and_parsed_answer_evaluations": true,
+  "author_hand_npz_evaluation": "resources/asterix/runs/author/evaluation.json",
+  "author_parsed_answer_evaluation": "resources/asterix/runs/author/answer-evaluation.json",
+  "relative_mean_increase_baseline": "Published hand.npz evaluated in Ember: mean53.469, not the published aggregate53.178.",
+  "extra_context_summary": [
+    "Developer instruction: Answer the user's request.",
+    "User message containing Global Agent Guidance, Ember agent guidance, and environment context."
+  ]
+}

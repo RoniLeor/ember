@@ -1,0 +1,78 @@
+{
+  "kind": "local_verification",
+  "checks": {
+    "command": "make check PYTEST_ARGS=",
+    "tests_passed": 550,
+    "format_lint_types_passed": true
+  },
+  "fresh_model_requests": 1,
+  "model": "gpt-6-astra",
+  "mode": "comparison",
+  "saved_reaudit_passed": true,
+  "trace_summary": {
+    "advertised_tools": [
+      "functions.exec",
+      "functions.request_user_input",
+      "functions.request_user_input_async",
+      "functions.wait"
+    ],
+    "tool_inventory_empty": false,
+    "prompt_context_matches": false,
+    "extra_message_count": 2,
+    "inference_count": 1,
+    "tool_call_count": 0,
+    "errors": []
+  },
+  "previous_files_checked": 155,
+  "previous_files_unchanged": true,
+  "evaluation": {
+    "settings": {
+      "experiment": "breakout",
+      "device": "cpu",
+      "episodes": 1000,
+      "seed": 0,
+      "max_steps": 10000
+    },
+    "mean": 296.311,
+    "standard_error": 6.537597146922978,
+    "mean_length": 5073.32,
+    "capped_fraction": 0.212,
+    "applied": 97,
+    "skipped": []
+  },
+  "first_100_mean": 303.76,
+  "previous_astra_first_100_mean": 530.13,
+  "author_local_1000_mean": 502.2,
+  "replay": {
+    "score": 546.0,
+    "steps": 9194,
+    "capped": false,
+    "settings": {
+      "experiment": "breakout",
+      "device": "cpu",
+      "episodes": 1,
+      "seed": 0,
+      "max_steps": 10000
+    },
+    "network_sha256": "6c3241be1fff8b085beceb307510cb70cfaddab65a28d1ac660fe0149b85e643",
+    "versions": {
+      "numpy": "2.5.4",
+      "minatar": "1.0.15",
+      "ember-playground": "0.1.0"
+    },
+    "applied": 97,
+    "skipped": [],
+    "replay": "breakout.html"
+  },
+  "exact_author_reproduction": false,
+  "artifact_sha256": {
+    "answer.md": "6c3241be1fff8b085beceb307510cb70cfaddab65a28d1ac660fe0149b85e643",
+    "prompt.txt": "766ee251d59a7893ed86d5eaea99ddb847529ab2092afc69f90f55fb0a22e876",
+    "run.json": "74486afb642d9ee418b95b62b0725178c34ed63811d8428747752c3637c3ba7f",
+    "trace-audit.json": "0c008341001e873b7626c00013708394db0436dce6037ef64d70527e93423393",
+    "reaudit.json": "fc2315b7560bb7390cdf31a91459847d731982de8a7f10959a4b73c57b1084f3",
+    "evaluation.json": "e7e9e6a5792271516e8e325f1e21b14c5415ee560f17fa9e7ff916c0ae47d90a",
+    "replay.json": "d32ff3aae8a244150681c82af869393d65442e9ac0aa8684c616f46c698c1b97",
+    "breakout.html": "a862bdb48023dc0b811b03fa46dbc1867c842c20d975fbc37d5ec6be381480c4"
+  }
+}

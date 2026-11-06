@@ -1,0 +1,10 @@
+{
+  "resources/asterix/runs/author/answer.md": {
+    "independent_ast_parser_equal": true,
+    "edits": 55
+  },
+  "resources/asterix/runs/astra-20261105T121139Z/answer.md": {
+    "independent_ast_parser_equal": true,
+    "edits": 100
+  }
+}

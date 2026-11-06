@@ -1,0 +1,16 @@
+{
+  "passed": true,
+  "mode": "comparison",
+  "tool_inventory_empty": false,
+  "prompt_context_matches": false,
+  "turn_completed": true,
+  "answer_matches": true,
+  "errors": [],
+  "usage": {
+    "input_tokens": 11989,
+    "cached_input_tokens": 2432,
+    "cache_write_input_tokens": 0,
+    "output_tokens": 19962,
+    "reasoning_output_tokens": 17092
+  }
+}

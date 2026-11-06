@@ -1,0 +1,21 @@
+{
+  "score": 248.0,
+  "steps": 4316,
+  "capped": false,
+  "settings": {
+    "experiment": "breakout",
+    "device": "cpu",
+    "episodes": 1,
+    "seed": 0,
+    "max_steps": 10000
+  },
+  "network_sha256": "9b11fecfb20756037a7728595b07039ce66c2a8531c41f7d4f19657a6e5d4810",
+  "versions": {
+    "numpy": "2.5.4",
+    "minatar": "1.0.15",
+    "ember-playground": "0.1.0"
+  },
+  "applied": 163,
+  "skipped": [],
+  "replay": "breakout.html"
+}

@@ -1,0 +1,13 @@
+{
+  "extra_messages": [
+    "Developer instruction: Answer the user's request.",
+    "User message containing Global Agent Guidance, Ember agent guidance, and environment context."
+  ],
+  "captured_instruction_message_sha256": "e1246cab48fbe4fd3e849f5b6ebb86d60d382a34a4fd74882e222cef5b79f3a9",
+  "captured_request_payload_sha256": "68926f61beb4a06d8672369175c574bc221c6e3dca85eb9931395144c133eb14",
+  "repo_AGENTS_current_sha256": "f291f1512e70ad2c0193916adb9246f56bca9847ca1dbc81cde8189c9c6ec970",
+  "repo_AGENTS_current_bytes_present_in_inference_context": true,
+  "global_AGENTS_current_sha256": "4b98bea50ac0903b6792e6d7afd7430edfe4c1e306696ce77d6ef22c7bfb70b3",
+  "global_AGENTS_current_bytes_present_in_inference_context": true,
+  "raw_private_context_saved_in_ignored_trace": true
+}
