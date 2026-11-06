@@ -4,7 +4,7 @@ import numpy as np
 from minatar import Environment
 
 from ember.playground.breakout.observation import to_inputs
-from ember.playground.breakout.tensors import FloatArray
+from ember.playground.tensors import FloatArray
 
 
 def input_index(row: int, column: int, channel: int) -> int:

@@ -3,7 +3,7 @@ name = "ember-playground"
 version = "0.1.0"
 description = "Small, audited weight-writing experiments."
 requires-python = ">=3.12"
-dependencies = ["minatar==1.0.15", "numpy>=2", "pydantic>=2,<3"]
+dependencies = ["minatar==1.0.15", "numpy>=2", "pydantic>=2,<3", "rich>=14"]
 
 [project.optional-dependencies]
 gpu = ["torch>=2"]

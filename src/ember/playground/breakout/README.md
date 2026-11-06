@@ -1,20 +1,20 @@
 # Breakout
 
 This package defines experiment `breakout`.
-This package also owns gameplay contracts, policies, records, evaluation, and replay.
+Shared gameplay contracts, policies, records, evaluation, and replay live in `ember.playground`.
 Generic model execution lives in the Ember core.
 
 ## Files
 
-- `games.py`: game contract and experiment registration.
-- `models.py`: settings and gameplay records.
-- `policy.py`: inference contracts and action sampling.
-- `eval.py`: episode execution and reconstructed evaluation.
-- `action.py`: episode recording and HTML export.
+- `../games.py`: game contract and experiment registration.
+- `../models.py`: settings and gameplay records.
+- `../policy.py`: inference contracts and action sampling.
+- `../eval.py`: episode execution and reconstructed evaluation.
+- `../action.py`: episode recording and HTML export.
 - `game.py`: registration, official environment creation, observation encoding, and adapter selection.
-- `network.py`: validated weight loading and NumPy/PyTorch inference.
-- `utils/`: safe text-edit grammar and ordered application.
-- `tensors.py`: float64 parser tensor storage.
+- `../network.py`: validated weight loading and NumPy/PyTorch inference.
+- `../utils/`: safe text-edit grammar and ordered application.
+- `../tensors.py`: float64 parser tensor storage.
 - `observation.py`: the task’s six-channel input mapping.
 - `NOTICE.md`: provenance for the absorbed local parser and mapping.
 - `base.py`: pinned source identity, downloads, prompt verification, and published-weight parity.

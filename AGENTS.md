@@ -10,9 +10,9 @@ Run commands from the project root. Keep changes scoped to the request.
 | First setup or after dependency changes | `make sync` | Install locked dependencies and development tools. Preserve installed optional packages. |
 | Work needs PyTorch or GPU checks | `make sync UV_SYNC_ARGS="--extra gpu"` | Install the optional inference backend. Linux and Windows select CUDA wheels. |
 | After Python edits | `make check-lint` | Check formatting, imports, lint rules, and types with Pyright, ty, and mypy. |
-| During implementation | `make test PYTEST_ARGS="tests/playground/breakout/models.py -k invalid"` | Run focused tests against the affected production code. Replace the example selection. |
+| During implementation | `make test PYTEST_ARGS="tests/playground/models.py -k invalid"` | Run focused tests against the affected production code. Replace the example selection. |
 | After finishing code changes and before delivery or any commit | `make check PYTEST_ARGS=` | Require passing static checks and the complete test suite. Clear focused test selections. |
-| Investigate test failures | `make test-verbose PYTEST_ARGS="tests/playground/breakout/models.py"` | Show individual test results and failure details. |
+| Investigate test failures | `make test-verbose PYTEST_ARGS="tests/playground/models.py"` | Show individual test results and failure details. |
 | Formatting needs correction | `make format` | Rewrite Python formatting. Review the resulting changes. |
 | Lint findings have automatic fixes | `make fix` | Format Python and apply Ruff's safe fixes. Review every change and rerun checks. |
 | Package metadata, assets, or build settings change | `make build` | Build the wheel. Inspect its contents for required package files. |

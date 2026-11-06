@@ -3,7 +3,7 @@
 import numpy as np
 from numpy.typing import NDArray
 
-from .tensors import FloatArray
+from ember.playground.tensors import FloatArray
 
 PADDLE_SOURCE: int = 0
 BALL_SOURCE: int = 1

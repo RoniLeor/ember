@@ -9,7 +9,7 @@ from unittest.mock import patch
 
 import pytest
 
-from ember.cli import arguments, main
+from ember.cli import arguments, main, replay_path
 from ember.providers.records import RunRecord
 
 
@@ -161,3 +161,29 @@ def test_default_output_is_not_created_for_invalid_run(completed_run: Path, fail
 def test_evaluation_keeps_optional_output_unset(completed_run: Path) -> None:
     args: argparse.Namespace = arguments(["evaluate", "--run", str(completed_run)])
     assert args.output is None
+
+
+@pytest.mark.parametrize("experiment", ["breakout", "local.breakout"])
+def test_default_replay_path_stays_in_the_run_folder(experiment: str, tmp_path: Path) -> None:
+    parser: argparse.ArgumentParser = argparse.ArgumentParser()
+    assert replay_path(run=tmp_path, experiment=experiment, parser=parser) == tmp_path / f"{experiment}.html"
+
+
+@pytest.mark.parametrize("experiment", ["local.breakout", "../outside"])
+def test_missing_run_error_precedes_experiment_validation(experiment: str, capsys: pytest.CaptureFixture[str]) -> None:
+    parser: argparse.ArgumentParser = argparse.ArgumentParser()
+    with pytest.raises(SystemExit) as failure:
+        replay_path(run=None, experiment=experiment, parser=parser)
+    assert failure.value.code == 2
+    assert "--output is required with --network" in capsys.readouterr().err
+
+
+@pytest.mark.parametrize("experiment", ["../outside", "/absolute", "nested/game", "nested\\game", ".", ".."])
+def test_default_replay_path_rejects_unsafe_names(
+    experiment: str, tmp_path: Path, capsys: pytest.CaptureFixture[str]
+) -> None:
+    parser: argparse.ArgumentParser = argparse.ArgumentParser()
+    with pytest.raises(SystemExit) as failure:
+        replay_path(run=tmp_path, experiment=experiment, parser=parser)
+    assert failure.value.code == 2
+    assert "Experiment must be a file name to use the default replay output" in capsys.readouterr().err

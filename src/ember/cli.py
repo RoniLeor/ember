@@ -8,14 +8,16 @@ import webbrowser
 from pathlib import Path
 
 from pydantic import BaseModel
+from rich.console import Console
 
+from .console import replaying, watch
 from .models import Audit
-from .playground.breakout.action import Replay
-from .playground.breakout.base import GameSource, Parity
-from .playground.breakout.eval import Evaluator
-from .playground.breakout.games import experiments
-from .playground.breakout.models import Settings
+from .playground.action import Replay
+from .playground.base import GameSource, Parity
 from .playground.config import DEFAULT_EXPERIMENT
+from .playground.eval import Evaluator
+from .playground.games import experiments
+from .playground.models import Settings
 from .plugins import Plugins
 from .providers import Provider, providers
 from .providers.records import RunRecord
@@ -69,10 +71,17 @@ def arguments(argv: list[str] | None) -> argparse.Namespace:
     audit.add_argument("--mode", choices=("strict", "comparison"), default="strict")
     args: argparse.Namespace = parser.parse_args(argv)
     if args.command in ("replay", "play") and args.output is None:
-        if args.run is None:
-            parser.error("--output is required with --network")
-        args.output = args.run / "breakout.html"
+        args.output = replay_path(run=args.run, experiment=args.experiment, parser=parser)
     return args
+
+
+def replay_path(*, run: Path | None, experiment: str, parser: argparse.ArgumentParser) -> Path:
+    """Resolve a safe default replay path or report the existing CLI syntax error."""
+    if run is None:
+        parser.error("--output is required with --network")
+    if Path(experiment).name != experiment or "\\" in experiment or experiment in (".", ".."):
+        parser.error("Experiment must be a file name to use the default replay output")
+    return run / f"{experiment}.html"
 
 
 def playback_arguments(*, commands: argparse._SubParsersAction) -> None:
@@ -92,7 +101,7 @@ def playback_arguments(*, commands: argparse._SubParsersAction) -> None:
             type=Path,
             help="Optional JSON destination; the result is also printed"
             if name == "evaluate"
-            else "HTML destination; with --run, defaults to RUN/breakout.html (replaces an existing file)",
+            else "HTML destination; with --run, defaults to RUN/<experiment>.html (replaces an existing file)",
         )
         if name == "evaluate":
             command.add_argument("--episodes", type=int, default=1_000)
@@ -115,8 +124,8 @@ def network_path(args: argparse.Namespace) -> Path:
     return answer
 
 
-def dispatch(args: argparse.Namespace) -> BaseModel | dict[str, object]:
-    """Keep transport and game execution separate from command parsing."""
+def dispatch(*, args: argparse.Namespace, console: Console) -> BaseModel | dict[str, object]:
+    """Keep transport and game execution separate from command parsing; progress goes to the console."""
     if args.command == "list":
         return {
             "experiments": list(experiments.games),
@@ -128,10 +137,16 @@ def dispatch(args: argparse.Namespace) -> BaseModel | dict[str, object]:
             return sources.fetch()
         if args.command == "parity":
             return sources.parity()
-        writer: Writer = Runner(
-            provider=providers.get(name=args.provider, sources=sources, model=args.model), mode=args.mode
+        selected: Provider = providers.get(name=args.provider, sources=sources, model=args.model)
+        writer: Writer = Runner(provider=selected, mode=args.mode)
+        output: Path = args.output.resolve()
+        return watch(
+            console=console,
+            output=output,
+            execute=args.execute,
+            title=f"{selected.name} · {selected.model} · {args.mode}",
+            work=lambda: writer(output=output, execute=args.execute),
         )
-        return writer(output=args.output.resolve(), execute=args.execute)
     if args.command == "audit":
         provider: Provider = providers.get(
             name=args.provider, sources=experiments.get(args.experiment).sources(root=args.reference.resolve())
@@ -147,7 +162,8 @@ def dispatch(args: argparse.Namespace) -> BaseModel | dict[str, object]:
     )
     if args.command == "evaluate":
         return Evaluator(settings=settings)(network=network_path(args), reconstructed=args.reconstructed)
-    return Replay(settings=settings)(network=network_path(args), output=args.output)
+    with replaying(console=console, experiment=settings.experiment, max_steps=settings.max_steps) as progress:
+        return Replay(settings=settings, observer=progress)(network=network_path(args), output=args.output)
 
 
 def main(argv: list[str] | None = None) -> int:
@@ -155,7 +171,7 @@ def main(argv: list[str] | None = None) -> int:
     args: argparse.Namespace = arguments(argv)
     try:
         Plugins(modules=tuple(args.plugin))()
-        result: BaseModel | dict[str, object] = dispatch(args)
+        result: BaseModel | dict[str, object] = dispatch(args=args, console=Console(stderr=True))
         text: str = (
             result.model_dump_json(indent=2, exclude={"frames"})
             if isinstance(result, BaseModel)

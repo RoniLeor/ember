@@ -40,5 +40,5 @@ def test_module_entry_point_works_outside_project(tmp_path: Path) -> None:
     )
     assert result.returncode == 0, result.stderr
     listed: dict[str, object] = json.loads(result.stdout)
-    assert listed["experiments"] == ["breakout"]
+    assert listed["experiments"] == ["asterix", "breakout"]
     assert listed["providers"] == {"claude": "claude-sonnet-5-5", "codex": "gpt-6-astra"}

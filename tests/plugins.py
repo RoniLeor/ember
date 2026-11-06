@@ -45,7 +45,7 @@ def test_plugins_register_once_and_play_real_game(plugin_file: Path, capsys: pyt
     plugin_file.write_text(CODE, encoding="utf-8")
     assert main(["--plugin", MODULE, "--plugin", MODULE, "list"]) == 0
     listed: dict[str, object] = json.loads(capsys.readouterr().out)
-    assert listed["experiments"] == ["breakout", "local.breakout"]
+    assert listed["experiments"] == ["asterix", "breakout", "local.breakout"]
     assert listed["providers"] == {
         "claude": "claude-sonnet-5-5",
         "codex": "gpt-6-astra",

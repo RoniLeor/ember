@@ -9,7 +9,7 @@ from numpy.typing import NDArray
 
 from ember.module import Context
 from ember.playground.breakout import Breakout
-from ember.playground.breakout.policy import Array
+from ember.playground.policy import Array
 
 
 def test_observation_channels_and_invalid_shape() -> None:

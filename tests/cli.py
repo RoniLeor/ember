@@ -8,7 +8,8 @@ import pytest
 
 from ember.base import SourceRecord
 from ember.cli import arguments, main
-from ember.playground.breakout.base import Parity, Sources
+from ember.playground.base import Parity
+from ember.playground.breakout.base import Sources
 from ember.providers.records import RunRecord
 from ember.runner import Runner
 from tests.providers.audit import EVENTS
@@ -17,7 +18,7 @@ from tests.providers.audit import EVENTS
 def test_list_help_and_invalid_arguments(capsys: pytest.CaptureFixture[str]) -> None:
     assert main(["list"]) == 0
     listed: dict[str, object] = json.loads(capsys.readouterr().out)
-    assert listed["experiments"] == ["breakout"]
+    assert listed["experiments"] == ["asterix", "breakout"]
     with pytest.raises(SystemExit) as exit_info:
         arguments(["--help"])
     assert exit_info.value.code == 0
@@ -110,3 +111,28 @@ def test_standalone_audit_checks_exact_context_and_saved_prompt(tmp_path: Path) 
     assert main(command) == 0
     (tmp_path / "prompt.txt").write_bytes(b"changed")
     assert main(command) == 1
+
+
+def test_progress_uses_stderr_only_and_keeps_stdout_json(
+    tmp_path: Path, capsys: pytest.CaptureFixture[str], monkeypatch: pytest.MonkeyPatch
+) -> None:
+    network: Path = tmp_path / "answer.md"
+    network.write_text("```edits\nb3[:] = 0\n```", encoding="utf-8")
+    replay: list[str] = ["replay", "--network", str(network), "--max-steps", "2", "--output", str(tmp_path / "r.html")]
+    monkeypatch.delenv("FORCE_COLOR", raising=False)
+    monkeypatch.setenv("TTY_COMPATIBLE", "0")
+    out: str
+    err: str
+    assert main(replay) == 0
+    out, err = capsys.readouterr()
+    assert err == ""
+    monkeypatch.setenv("TTY_COMPATIBLE", "1")
+    assert main(replay) == 0
+    shown: str
+    shown, err = capsys.readouterr()
+    assert json.loads(shown) == json.loads(out) and "Recorded breakout" in err
+    record: RunRecord = RunRecord(status="blocked", model="gpt-6-astra")
+    with patch.object(Runner, "__call__", return_value=record):
+        assert main(["run", "--output", str(tmp_path / "run")]) == 1
+    out, err = capsys.readouterr()
+    assert json.loads(out)["status"] == "blocked" and "ember run" in err and "blocked" in err

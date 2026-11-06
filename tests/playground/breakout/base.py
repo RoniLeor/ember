@@ -8,14 +8,15 @@ from unittest.mock import Mock, patch
 import pytest
 
 from ember.base import SourceRecord
-from ember.playground.breakout.base import FILES, Parity, Sources
+from ember.playground.base import Parity
+from ember.playground.breakout.base import FILES, Sources
 
 
 def test_fetch_pins_urls_and_keeps_existing_data(tmp_path: Path) -> None:
     sources: Sources = Sources(root=tmp_path)
     response: Mock = Mock(side_effect=[BytesIO(b"data") for _ in FILES])
     with (
-        patch("ember.playground.breakout.base.urlopen", response),
+        patch("ember.playground.base.urlopen", response),
         patch.object(Sources, "verify_prompt", return_value=b"data"),
         patch.object(Sources, "parity"),
     ):
@@ -39,7 +40,7 @@ def test_fetch_pins_urls_and_keeps_existing_data(tmp_path: Path) -> None:
     response.assert_called()
     (tmp_path / "breakout/prompt.txt").write_bytes(b"unique existing content")
     with (
-        patch("ember.playground.breakout.base.urlopen", return_value=BytesIO(b"different")),
+        patch("ember.playground.base.urlopen", return_value=BytesIO(b"different")),
         pytest.raises(ValueError, match="differs"),
     ):
         sources.fetch()
@@ -53,7 +54,7 @@ def test_prompt_hash_validation(tmp_path: Path) -> None:
     sources: Sources = Sources(root=tmp_path)
     with pytest.raises(ValueError, match="differ"):
         sources.verify_prompt()
-    with patch("ember.playground.breakout.base.sha256") as digest:
+    with patch("ember.playground.base.sha256") as digest:
         digest.return_value.hexdigest.side_effect = [
             "766ee251d59a7893ed86d5eaea99ddb847529ab2092afc69f90f55fb0a22e876",
             "b33fe0624137cd6f190e42a8659046baf16261f3c29cd6455734523ba473afeb",
@@ -107,7 +108,7 @@ def test_actual_published_reference_parity() -> None:
 
 def test_failed_fetch_verification_does_not_write_manifest(tmp_path: Path) -> None:
     with (
-        patch("ember.playground.breakout.base.urlopen", side_effect=[BytesIO(b"data") for _ in FILES]),
+        patch("ember.playground.base.urlopen", side_effect=[BytesIO(b"data") for _ in FILES]),
         pytest.raises(ValueError, match="differ"),
     ):
         Sources(root=tmp_path).fetch()

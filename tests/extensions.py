@@ -27,9 +27,10 @@ from ember import (
 )
 from ember.base import SourceRecord
 from ember.cli import main
-from ember.playground.breakout.base import FILES, GameSourceFactory, Parity, Sources
-from ember.playground.breakout.network import Weights
-from ember.playground.breakout.policy import Loader
+from ember.playground.base import GameSourceFactory, Parity
+from ember.playground.breakout.base import FILES, Sources
+from ember.playground.network import Weights
+from ember.playground.policy import Loader
 from ember.providers import Claude, Codex
 from ember.providers.records import RunRecord
 from tests.providers.audit import EVENTS
@@ -190,7 +191,7 @@ def test_source_subclass_fetches_and_checks_its_own_directory(alternate: Path) -
     content["prompt.txt"] = PROMPT
     content["instructions.md"] = INSTRUCTIONS
     source: AlternateSources = AlternateSources(root=alternate)
-    with patch("ember.playground.breakout.base.urlopen", side_effect=[BytesIO(value) for value in content.values()]):
+    with patch("ember.playground.base.urlopen", side_effect=[BytesIO(value) for value in content.values()]):
         record: SourceRecord = source.fetch()
     assert record.commit == AlternateSources.commit
     assert "alternate/prompt.txt" in record.hashes and "breakout/prompt.txt" not in record.hashes

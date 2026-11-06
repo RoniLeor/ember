@@ -6,7 +6,7 @@ MAKEFLAGS += --no-builtin-variables
 
 help:
 	@echo "Targets: sync check check-lint format fix test test-verbose build"
-	@echo 'Options: UV_SYNC_ARGS="--extra gpu"; PYTEST_ARGS="tests/playground/breakout/models.py -k invalid"'
+	@echo 'Options: UV_SYNC_ARGS="--extra gpu"; PYTEST_ARGS="tests/playground/models.py -k invalid"'
 
 UV_SYNC_ARGS ?=
 PYTEST_ARGS ?=

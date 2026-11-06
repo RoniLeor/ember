@@ -26,7 +26,7 @@ It combines weight editing, typed orchestration, policy execution, and provider-
 
 <p align="center"><sub>Figure 1. One-shot weight synthesis (a) and neural policy execution (b). Drawings are schematic.</sub></p>
 
-**Current policy:** Breakout · 20,486 parameters · `600 → 32 → 32 → 6`.
+**Policies:** Breakout and Asterix · 20,486 parameters each · `600 → 32 → 32 → 6`.
 The Python core composes typed `Module` calls through scoped `Context` settings.
 
 <p align="center">
@@ -39,10 +39,13 @@ The Python core composes typed `Module` calls through scoped `Context` settings.
 
 Use Python 3.12+ and [uv](https://docs.astral.sh/uv/). Run these commands from the project root:
 
+Built-in playgrounds are **Breakout** and **Asterix**. Breakout is the default; select Asterix with `--experiment asterix`.
+
 ```sh
 make sync
 uv run ember list
 uv run ember parity
+uv run ember parity --experiment asterix
 ```
 
 The checkout includes the pinned inputs and saved runs. No model request is needed to inspect or replay them.
@@ -58,6 +61,7 @@ uv run ember replay \
 This writes `astra-preview.html` and keeps the saved `breakout.html`. It replaces `astra-preview.html` if it already exists.
 Without `--output`, `--run` writes `breakout.html` in the run folder and replaces the saved replay.
 Use `play` instead of `replay` to also open the result in your browser.
+On a terminal, a progress bar on stderr shows the steps and score. Stdout keeps the JSON result.
 
 **Replay the author’s published weights:**
 
@@ -92,6 +96,7 @@ uv run ember run \
 ```
 
 Omit `--execute` to prepare the command without making an inference request.
+On a terminal, a live panel on stderr shows the preflight, model thinking, and audit stages. Stdout keeps the JSON record.
 Strict mode is the default; it blocks execution unless the pinned context and an empty tool inventory are established.
 The explicit comparison mode permits execution with declared deviations and verifies the actual Codex request/response trace.
 
@@ -119,6 +124,7 @@ Raw traces, event logs, and preflight context stay local because they can contai
 ## Go deeper
 
 - [Technical guide](docs/guide.md): commands, Python API, contexts, extensions, and device setup.
+- [Asterix guide](src/ember/playground/asterix/README.md): rules, observation mapping, and pinned inputs.
 - [Breakout guide](src/ember/playground/breakout/README.md): architecture, parser, rules, and pinned inputs.
 - [Research protocol](docs/protocol.md): provider behavior, audit contracts, provenance, and saved results.
 - [Agent guidance](AGENTS.md): project checks and contribution rules.

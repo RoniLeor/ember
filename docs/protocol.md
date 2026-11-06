@@ -120,7 +120,7 @@ For strict Codex runs, the folder records the prompt, model, command, CLI versio
 A completed request also records the event stream, answer, usage, stderr, and optional CLI trace.
 The audit rejects tool calls, unknown events, incomplete turns, multiple answers, and answer-file mismatches.
 The standalone audit also verifies the saved prompt and model context against the pinned reference files.
-Use `audit --reference PATH` when the resource root is elsewhere. Breakout files must be in its `breakout/` subfolder.
+Use `audit --reference PATH` when the resource root is elsewhere. Place inputs in the selected game's subfolder: `breakout/` or `asterix/`.
 Its tool-availability evidence comes from the preflight inventory. A trace is retained for further request-level inspection.
 The audit cannot independently prove the model or settings used. Those are recorded in `run.json` and any available CLI trace.
 The saved preflight is not cryptographically linked to the execution log.

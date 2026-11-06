@@ -6,7 +6,7 @@ Run all commands from the project root. The [README](../README.md) shows the set
 ## Commands
 
 Each command has `--help`. Put each `--plugin MODULE` option before the command name.
-All commands except `list` accept `--experiment NAME`. The default experiment is `breakout`.
+All commands except `list` accept `--experiment NAME`. The built-in experiments are `breakout` and `asterix`. Breakout is selected by default.
 
 | Command | What it does |
 | --- | --- |
@@ -21,7 +21,7 @@ All commands except `list` accept `--experiment NAME`. The default experiment is
 
 - `evaluate`, `replay`, and `play` read `--network FILE` or `--run DIR`. `--run` uses `DIR/answer.md` from a completed run.
 - `--run` does not prove that the run passed `audit`. The author folder has no `run.json`, so use its `hand.npz` with `--network`.
-- For `replay` and `play`, `--output` is necessary with `--network`. With `--run`, the default output is `DIR/breakout.html`.
+- For `replay` and `play`, `--output` is necessary with `--network`. With `--run`, the default output is `DIR/<experiment>.html`.
 - Ember does not make the parent folder of `--output`, and it replaces an existing file. For the saved author and Astra runs, use a new file name.
 - The defaults are `--device cpu`, `--seed 0`, and `--max-steps 10000`. By default, `evaluate` plays 1,000 episodes (`--episodes N`).
 - Each `run` call must use a new output folder. This rule also applies when you do not add `--execute`.
@@ -73,7 +73,7 @@ A plugin is a Python module that registers classes. `--plugin MODULE` imports it
 
 2. Run `uv run python -m ember --plugin local list`. The output shows `local.breakout`.
 
-- A new game is an experiment class. It follows the `Game` contract in `src/ember/playground/breakout/games.py`.
+- A new game is an experiment class. It follows the `Game` contract in `src/ember/playground/games.py`.
 - A new provider uses `@ember.provider` and the `Provider` contract in `src/ember/providers/base.py`.
 - Two experiments or two providers with the same name cause an error. Ember does not search folders for plugins.
 - `python -m ember --plugin NAME` can import `NAME.py` from the current folder. The `ember` script imports only installed modules.
@@ -86,5 +86,6 @@ Run `make check PYTEST_ARGS=` before delivery. It runs Ruff, Pyright, ty, mypy, 
 
 ## More information
 
+- [Asterix](../src/ember/playground/asterix/README.md): rules, observation mapping, and pinned inputs.
 - [Breakout](../src/ember/playground/breakout/README.md): the network, the parser, the rules, and the pinned inputs.
 - [Research protocol](protocol.md): the providers, the audit modes, the evidence, and the saved results.
